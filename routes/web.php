@@ -11,3 +11,6 @@ Route::get('/animation', function () {
 Route::get('/levels', function () {
     return view('levels');
 });
+Route::get('/create', function () {
+    return view('lessons.create');
+})->can('admin');
