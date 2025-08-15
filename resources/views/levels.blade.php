@@ -10,14 +10,14 @@
     />
 
     <!-- Search and filter section -->
-    <x-search-bar
+    <!--<xsearch-bar
         primaryColor="blue"
         searchId="searchLevels"
         placeholder="Search level design lessons...">
         <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Layouts</button>
         <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Game Mechanics</button>
         <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Environment</button>
-    </x-search-bar>
+    </xsearch-bar>-->
 
     <!-- Lessons grid -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -109,65 +109,6 @@
                 duration="18 min"
             />
 
-            <!-- Lesson 9 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1601987177651-8edfe6c20009?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Level Aesthetics" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-full">Intermediate</span>
-                        <span class="text-xs text-gray-400">24 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">Level Aesthetics</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Develop a consistent and appealing visual style for your game levels across different environments.</p>
-                </div>
-            </div>
-
-            <!-- Lesson 10 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Puzzle Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-pink-400 bg-pink-400/10 px-2.5 py-0.5 rounded-full">Advanced</span>
-                        <span class="text-xs text-gray-400">32 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">Puzzle Design</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Create engaging and satisfying puzzles that challenge players without causing frustration.</p>
-                </div>
-            </div>
-
-            <!-- Lesson 11 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Combat Spaces" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-pink-400 bg-pink-400/10 px-2.5 py-0.5 rounded-full">Advanced</span>
-                        <span class="text-xs text-gray-400">28 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">Combat Spaces</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Design combat arenas and encounter spaces that create dynamic and interesting gameplay moments.</p>
-                </div>
-            </div>
-
-            <!-- Lesson 12 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Open World Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-pink-400 bg-pink-400/10 px-2.5 py-0.5 rounded-full">Advanced</span>
-                        <span class="text-xs text-gray-400">40 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors duration-300">Open World Design</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Learn strategies for designing engaging open worlds with points of interest and meaningful exploration.</p>
-                </div>
-            </div>
 
             <x-lesson-card
                 primaryColor="blue"
@@ -210,7 +151,7 @@
             />
 
             <!-- Add pagination controls -->
-            <x-pagination primaryColor="blue" :currentPage="1" :totalPages="3" />
+            <!--<xpagination primaryColor="blue" :currentPage="1" :totalPages="3" />-->
         </div>
     </div>
 

@@ -6,22 +6,23 @@
         description="Explore our comprehensive animation tutorials, from basic principles to advanced techniques. Learn how to bring your ideas to life through the art of animation."
     />
 
-    <x-search-bar
-        primaryColor="purple"
-        searchId="searchLessons"
-        placeholder="Search animation lessons...">
-        <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Beginners</button>
-        <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Intermediate</button>
-        <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Advanced</button>
-    </x-search-bar>
+    <!-- Search and filter section -->
+    <!--<xsearch-bar
+        primaryColor="blue"
+        searchId="searchLevels"
+        placeholder="Search level design lessons...">
+        <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Layouts</button>
+        <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Game Mechanics</button>
+        <button class="px-4 py-2 rounded-full bg-slate-800 text-gray-300 hover:bg-slate-700 font-medium text-sm whitespace-nowrap">Environment</button>
+    </xsearch-bar>-->
 
     <!-- Lessons grid -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- Section title -->
-        <div class="mb-12">
+        <!--<div class="mb-12">
             <h2 class="text-3xl font-bold text-white">Animation Lessons</h2>
             <p class="mt-2 text-gray-400">Browse our collection of 25+ animation tutorials</p>
-        </div>
+        </div>-->
 
         <!-- Lessons grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -105,65 +106,7 @@
                 duration="30 min"
             />
 
-            <!-- Lesson 9 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="3D Character Animation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-pink-400 bg-pink-400/10 px-2.5 py-0.5 rounded-full">Advanced</span>
-                        <span class="text-xs text-gray-400">35 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">3D Character Animation</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Master the techniques of 3D character animation using industry-standard software.</p>
-                </div>
-            </div>
 
-            <!-- Lesson 10 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Motion Graphics" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-blue-400 bg-blue-400/10 px-2.5 py-0.5 rounded-full">Intermediate</span>
-                        <span class="text-xs text-gray-400">28 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">Motion Graphics</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Create dynamic motion graphics animations for intros, titles, and explainer videos.</p>
-                </div>
-            </div>
-
-            <!-- Lesson 11 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Animation for Games" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-pink-400 bg-pink-400/10 px-2.5 py-0.5 rounded-full">Advanced</span>
-                        <span class="text-xs text-gray-400">40 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">Animation for Games</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Learn specific techniques for creating game-ready animations with optimization in mind.</p>
-                </div>
-            </div>
-
-            <!-- Lesson 12 -->
-            <div class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-300 hover:shadow-glow">
-                <div class="aspect-video w-full overflow-hidden bg-slate-900">
-                    <img src="https://images.unsplash.com/photo-1520697768239-bbb468e68fc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stop Motion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="text-xs font-medium text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-full">Beginner</span>
-                        <span class="text-xs text-gray-400">22 min</span>
-                    </div>
-                    <h3 class="text-lg font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">Stop Motion</h3>
-                    <p class="mt-2 text-sm text-gray-400 line-clamp-2">Create charming stop motion animations using everyday objects and simple camera setups.</p>
-                </div>
-            </div>
 
             <x-lesson-card
                 primaryColor="purple"
@@ -206,7 +149,7 @@
             />
 
             <!-- Add pagination controls -->
-            <x-pagination primaryColor="purple" :currentPage="1" :totalPages="3" />
+            <!--<xpagination primaryColor="purple" :currentPage="1" :totalPages="3" />-->
         </div>
     </div>
 

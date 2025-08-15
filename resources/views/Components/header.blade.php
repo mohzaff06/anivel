@@ -2,13 +2,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-6">
             <div class="flex items-center">
-                <a href="/" class="flex items-center">
+                <a href="/{{ $adminKey }}" class="flex items-center">
                     <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-{{ $primaryColor ?? 'purple' }}-400 to-pink-500">AniVel</span>
                 </a>
                 <nav class="ml-10 space-x-6 hidden md:flex">
-                    <a href="/" class="{{ request()->is('/') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Home</a>
-                    <a href="/animation" class="{{ request()->is('animation') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Animation</a>
-                    <a href="/levels" class="{{ request()->is('levels') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Levels</a>
+                    <a href="/{{ $adminKey }}" class="{{ request()->is('/') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Home</a>
+                    <a href="/animation{{ $adminKey }}" class="{{ request()->is('animation') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Animation</a>
+                    <a href="/levels{{ $adminKey }}" class="{{ request()->is('levels') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Levels</a>
+                    @can('admin')<a href="/create{{ $adminKey }}" class="{{ request()->is('create') ? 'text-white font-medium border-b-2 border-'.(($primaryColor ?? 'purple').'-500').' pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">Create</a>@endcan
                 </nav>
             </div>
             <div>
@@ -22,9 +23,10 @@
         <!-- Mobile menu (hidden by default) -->
         <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-white/10 transition-all duration-300">
             <nav class="flex flex-col space-y-4">
-                <a href="/" class="{{ request()->is('/') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Home</a>
-                <a href="/animation" class="{{ request()->is('animation') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Animation</a>
-                <a href="/levels" class="{{ request()->is('levels') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Levels</a>
+                <a href="/{{ $adminKey }}" class="{{ request()->is('/') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Home</a>
+                <a href="/animation{{ $adminKey }}" class="{{ request()->is('animation') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Animation</a>
+                <a href="/levels{{ $adminKey }}" class="{{ request()->is('levels') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Levels</a>
+                @can('admin')<a href="/create{{ $adminKey }}" class="{{ request()->is('create') ? 'text-white font-medium' : 'text-gray-300' }} py-2">Create</a>@endcan
             </nav>
         </div>
     </div>

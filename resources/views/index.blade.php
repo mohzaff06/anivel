@@ -7,6 +7,10 @@
             <div class="absolute -bottom-[10%] left-[30%] w-[45vw] h-[45vw] max-w-[450px] max-h-[450px] bg-pink-600 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
         </div>
 
+        <!-- Header -->
+        <!--<div class="w-full absolute top-0 left-0 z-10">
+            add x- <header primaryColor="purple" />
+        </div>-->
 
 
         <!-- Main content -->
@@ -22,7 +26,7 @@
             <!-- Cards container -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
                 <!-- Animation Card -->
-                <a href="/animation" class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-sm p-1 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20">
+                <a href="/animation{{ $adminKey }}" class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur-sm p-1 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20">
                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="relative h-full flex flex-col p-6 border border-white/10 rounded-xl overflow-hidden">
                         <div class="flex-1 flex flex-col items-center justify-center p-6 text-center space-y-4">
@@ -46,7 +50,7 @@
                 </a>
 
                 <!-- Levels Card -->
-                <a href="/levels" class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-900/40 to-blue-900/40 backdrop-blur-sm p-1 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-pink-500/20">
+                <a href="/levels{{ $adminKey }}" class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-pink-900/40 to-blue-900/40 backdrop-blur-sm p-1 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-pink-500/20">
                     <div class="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div class="relative h-full flex flex-col p-6 border border-white/10 rounded-xl overflow-hidden">
                         <div class="flex-1 flex flex-col items-center justify-center p-6 text-center space-y-4">
