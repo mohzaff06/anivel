@@ -54,7 +54,7 @@ Write-Host "🌿 Branch: $branch" -ForegroundColor Cyan
 Write-Host "🚀 Deploying to Koyeb..." -ForegroundColor Green
 
 $deployCmd = @(
-    $koyebExe, "app", "init", "anivel-dh",
+    $koyebExe, "app", "init", "anivel",
     "--git", $repoName,
     "--git-branch", $branch,
     "--ports", "8000:http",
@@ -77,8 +77,8 @@ Write-Host "Running: $($deployCmd -join ' ')" -ForegroundColor Gray
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Deployment initiated successfully!" -ForegroundColor Green
-    Write-Host "🌐 Your app will be available at: https://anivel-dh.koyeb.app" -ForegroundColor Cyan
-    Write-Host "📊 Monitor deployment at: https://app.koyeb.com/apps/anivel-dh" -ForegroundColor Cyan
+    Write-Host "🌐 Your app will be available at: https://anivel.koyeb.app" -ForegroundColor Cyan
+    Write-Host "📊 Monitor deployment at: https://app.koyeb.com/apps/anivel" -ForegroundColor Cyan
 } else {
     Write-Host "❌ Deployment failed. Check the error messages above." -ForegroundColor Red
     Write-Host "💡 You can also deploy manually via the Koyeb dashboard:" -ForegroundColor Yellow
