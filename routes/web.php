@@ -3,6 +3,11 @@
 use App\Http\Controllers\LessonController;
 use Illuminate\Support\Facades\Route;
 
+// Simple test route to check if Laravel is working
+Route::get('/ping', function () {
+    return 'AniVel is working!';
+});
+
 // Test route to check if application is working
 Route::get('/test', function () {
     return response()->json([
@@ -32,8 +37,9 @@ Route::fallback(function () {
         'error' => 'Route not found',
         'message' => 'The requested route does not exist.',
         'available_routes' => [
-            'homepage' => '/',
+            'ping' => '/ping',
             'test' => '/test',
+            'homepage' => '/',
             'animation' => '/animation',
             'levels' => '/levels',
             'create_lesson' => '/create'

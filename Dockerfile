@@ -44,8 +44,9 @@ RUN touch database/database.sqlite
 RUN chmod -R 775 storage bootstrap/cache database public/storage
 RUN chown -R www-data:www-data storage bootstrap/cache database public/storage
 
-# Configure Apache
+# Configure Apache - enable required modules
 RUN a2enmod rewrite
+RUN a2enmod headers
 COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Set environment variables
