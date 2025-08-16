@@ -1,80 +1,89 @@
 <x-layout>
     <x-hero-section
-        primaryColor="blue"
-        secondaryColor="purple"
-        :title="'Edit <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">Lesson</span>'"
-        description="Update your animation lesson content, making it even better for your audience."
+        primaryColor="purple"
+        secondaryColor="blue"
+        title='Edit <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500">Lesson</span>'
+        description=""
     />
 
     <div class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
             <div class="p-6">
-                <form action="{{ route('lessons.update', $lesson) }}{{ $adminKey }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form action="/{{$lesson->category}}/{{$lesson->id}}/edit{{ $adminKey }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
-                    @method('PUT')
 
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Lesson Title</label>
-                        <input type="text" name="title" id="title" value="{{ old('title', $lesson->title) }}" required
-                            class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="title" id="title" value="{{ $lesson->title }}" required
+                               class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500">
                         @error('title')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
                         <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
-                        <textarea name="description" id="description" rows="4" required
-                            class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('description', $lesson->description) }}</textarea>
+                        <textarea name="description" id="description" rows="3" required
+                                  class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500">{{ $lesson->description }}</textarea>
                         @error('description')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
                         <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Lesson Content</label>
                         <textarea name="content" id="content" rows="8" required
-                            class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('content', $lesson->content) }}</textarea>
+                                  class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500">{{ $lesson->content }}</textarea>
                         @error('content')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="level_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Level</label>
-                        <select name="level_id" id="level_id" required
-                            class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Select a level</option>
-                            @foreach ($levels as $level)
-                                <option value="{{ $level->id }}" {{ old('level_id', $lesson->level_id) == $level->id ? 'selected' : '' }}>{{ $level->name }}</option>
-                            @endforeach
+                        <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
+                        <select name="category" id="category" required
+                                class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                            <option value="">Select a category</option>
+                            <option value="levels" {{ $lesson->category == 'levels' ? 'selected' : '' }}>Levels</option>
+                            <option value="animation" {{ $lesson->category == 'animation' ? 'selected' : '' }}>Animation</option>
                         </select>
-                        @error('level_id')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @error('category')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="thumbnail" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Thumbnail Image (Leave empty to keep current image)</label>
-                        @if ($lesson->thumbnail)
-                            <div class="mt-2 mb-4">
-                                <img src="{{ asset('storage/' . $lesson->thumbnail) }}" alt="Current thumbnail" class="w-32 h-32 object-cover rounded-lg">
-                            </div>
-                        @endif
-                        <input type="file" name="thumbnail" id="thumbnail"
-                            class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        @error('thumbnail')
-                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        <label for="video" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Video Link</label>
+                        <input type="text" name="video" id="video" value="{{ $lesson->video }}"
+                               class="mt-1 block w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+                        @error('video')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="flex items-center justify-end space-x-4">
-                        <a href="{{ route('lessons.show', $lesson) }}"
-                            class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Cancel
-                        </a>
+                    <div>
+                        <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Image</label>
+                        <input type="file" name="image" id="image"
+                               class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
+                        @error('image')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="thumbnail" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Thumbnail Image</label>
+                        <input type="file" name="thumbnail" id="thumbnail"
+                               class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
+                        @error('thumbnail')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+
+
+                    <div class="flex items-center justify-end">
                         <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 animate-float-blob">
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 animate-pulse-blob">
                             Update Lesson
                         </button>
                     </div>

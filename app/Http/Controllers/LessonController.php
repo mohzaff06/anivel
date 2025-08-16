@@ -3,75 +3,68 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
-use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
 {
-    public function index()
+    public function index(string $category)
     {
-        $lessons = Lesson::with('level')->latest()->paginate(12);
-        return view('lessons.index', compact('lessons'));
+        $lessons = Lesson::where('category', $category)->get();
+        return view( $category, compact('lessons'));
     }
 
     public function create()
     {
-        $this->authorize('admin');
-        $levels = Level::all();
-        return view('lessons.create', compact('levels'));
+        return view('lessons.create');
     }
 
     public function store(Request $request)
     {
-        $this->authorize('admin');
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
             'content' => 'required|string',
-            'level_id' => 'required|exists:levels,id',
-            'thumbnail' => 'nullable|image|max:2048',
+            'description' => 'required|string',
+            'category' => 'required|in:levels,animation',
+            'video' => 'nullable|string|url',
+            'thumbnail' => 'nullable|image',
+            'image' => 'nullable|image',
         ]);
 
         if ($request->hasFile('thumbnail')) {
             $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         }
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
 
         $lesson = Lesson::create($validated);
-
-        return redirect()->route('lessons.show', $lesson)
-            ->with('success', 'Lesson created successfully!');
+        $link = '/' . $validated['category'] . '/' . $lesson->id . app('adminKey');
+        return redirect($link)->with('success', 'Lesson created successfully!');
     }
 
-    public function show(Lesson $lesson)
+    public function show(string $category, Lesson $lesson)
     {
-        // Get related lessons (same level, excluding current lesson)
-        $relatedLessons = Lesson::where('level_id', $lesson->level_id)
-            ->where('id', '!=', $lesson->id)
-            ->take(4)
-            ->get();
-
-        return view('lessons.show', compact('lesson', 'relatedLessons'));
+        return view('lessons.show', compact('lesson'));
     }
 
-    public function edit(Lesson $lesson)
+    public function edit(string $category, Lesson $lesson)
     {
-        $this->authorize('admin');
-        $levels = Level::all();
-        return view('lessons.edit', compact('lesson', 'levels'));
+        return view('lessons.edit', compact('lesson'));
     }
 
-    public function update(Request $request, Lesson $lesson)
+    public function update(Request $request,string $category, Lesson $lesson)
     {
-        $this->authorize('admin');
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
             'content' => 'required|string',
-            'level_id' => 'required|exists:levels,id',
-            'thumbnail' => 'nullable|image|max:2048',
+            'description' => 'required|string',
+            'category' => 'required|in:levels,animation',
+            'video' => 'nullable|string|url',
+            'thumbnail' => 'nullable|image',
+            'image' => 'nullable|image',
         ]);
 
         if ($request->hasFile('thumbnail')) {
@@ -81,25 +74,33 @@ class LessonController extends Controller
             }
             $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         }
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($lesson->image) {
+                Storage::disk('public')->delete($lesson->image);
+            }
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
 
         $lesson->update($validated);
 
-        return redirect()->route('lessons.show', $lesson)
-            ->with('success', 'Lesson updated successfully!');
+        $link = '/' . $validated['category'] . '/' . $lesson->id . app('adminKey');
+        return redirect($link)->with('success', 'Lesson Updated successfully!');
     }
 
-    public function destroy(Lesson $lesson)
+    public function destroy(string $category, Lesson $lesson)
     {
-        $this->authorize('admin');
 
-        // Delete thumbnail if exists
         if ($lesson->thumbnail) {
             Storage::disk('public')->delete($lesson->thumbnail);
+        }
+        if ($lesson->image) {
+            Storage::disk('public')->delete($lesson->image);
         }
 
         $lesson->delete();
 
-        return redirect()->route('lessons.index')
+        return redirect('/' . $category . app('adminKey'))
             ->with('success', 'Lesson deleted successfully!');
     }
 }

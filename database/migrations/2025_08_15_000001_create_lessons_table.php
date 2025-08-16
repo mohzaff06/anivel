@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->longText('content');
+            $table->text('category');
+            $table->string('video')->nullable();
             $table->string('thumbnail')->nullable();
-            $table->foreignId('level_id')->constrained()->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

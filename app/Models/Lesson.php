@@ -9,19 +9,10 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'description',
-        'content',
-        'thumbnail',
-        'level_id',
-    ];
+    protected $guarded = [];
 
     /**
      * Get the level that owns the lesson.
      */
-    public function level()
-    {
-        return $this->belongsTo(Level::class);
-    }
+
 }
