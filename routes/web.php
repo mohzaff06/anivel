@@ -7,6 +7,13 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/debug', function() {
+    $files = [];
+    $files['components'] = File::allFiles(resource_path('views/components'));
+    $files['views'] = File::allFiles(resource_path('views'));
+    return response()->json($files);
+});
+
 Route::get('/create', [LessonController::class, 'create'])->can('admin');
 Route::post('/create', [LessonController::class, 'store'])->can('admin');
 
