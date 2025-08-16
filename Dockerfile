@@ -28,8 +28,8 @@ WORKDIR /var/www/html
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www/html
+# Set proper ownership
+RUN chown -R www-data:www-data /var/www/html
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
@@ -39,10 +39,10 @@ RUN npm ci --only=production
 RUN npm run build
 
 # Create necessary directories and set permissions
-RUN mkdir -p database storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache
+RUN mkdir -p database storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache public/storage
 RUN touch database/database.sqlite
-RUN chmod -R 775 storage bootstrap/cache database
-RUN chown -R www-data:www-data storage bootstrap/cache database
+RUN chmod -R 775 storage bootstrap/cache database public/storage
+RUN chown -R www-data:www-data storage bootstrap/cache database public/storage
 
 # Configure Apache
 RUN a2enmod rewrite
@@ -53,12 +53,18 @@ ENV APP_ENV=production
 ENV APP_DEBUG=false
 ENV DB_CONNECTION=sqlite
 ENV DB_DATABASE=/var/www/html/database/database.sqlite
+ENV APP_KEY=base64:xBfe/FMAhapeXsCmtSV2a19A3q78b21CMOPU6Gro89Y=
 
 # Run Laravel commands
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
+RUN php artisan storage:link
 RUN php artisan migrate --force
+
+# Final permission fix
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 755 /var/www/html/public
 
 # Expose port 80
 EXPOSE 80

@@ -1,5 +1,5 @@
 <?php
 
-    return [
-        'key' => env('ADMIN_KEY', 'dhdouh08'),
-    ];
+return [
+    'key' => env('ADMIN_KEY', 'dhdouh08'),
+];
