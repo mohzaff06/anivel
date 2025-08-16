@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -25,17 +25,22 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /workspace
 
-# Copy existing application directory contents
-COPY . /workspace
-
-# Set proper ownership
-RUN chown -R www-data:www-data /workspace
+# Copy composer files first for better caching
+COPY composer.json composer.lock ./
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Install Node.js dependencies and build assets
+# Copy package.json for Node dependencies
+COPY package.json package-lock.json* ./
+
+# Install Node.js dependencies
 RUN npm ci --only=production
+
+# Copy rest of application
+COPY . .
+
+# Build Vite assets
 RUN npm run build
 
 # Create necessary directories and set permissions
@@ -47,6 +52,10 @@ RUN chown -R www-data:www-data storage bootstrap/cache database public/storage
 # Configure Apache - enable required modules
 RUN a2enmod rewrite
 RUN a2enmod headers
+
+# Configure Apache to listen on port 8000
+RUN sed -i 's/80/8000/g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's/80/8000/g' /etc/apache2/ports.conf
 
 # Set the document root to the public directory
 ENV APACHE_DOCUMENT_ROOT /workspace/public
@@ -64,8 +73,8 @@ ENV APP_KEY=base64:xBfe/FMAhapeXsCmtSV2a19A3q78b21CMOPU6Gro89Y=
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
-RUN php artisan storage:link
-RUN php artisan migrate --force
+RUN php artisan storage:link || true
+RUN php artisan migrate --force || true
 
 # Final permission fix
 RUN chown -R www-data:www-data /workspace
