@@ -1,35 +1,40 @@
-FROM heroku/heroku:22
 
-# Install Node.js and npm
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get update && \
-    apt-get install -y nodejs
+# Use official PHP image with required extensions
+FROM php:8.2-cli
 
-# Install PostgreSQL client and PHP extensions
-RUN apt-get install -y libpq-dev && \
-    docker-php-ext-install pdo_pgsql
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    unzip \
+    zip \
+    libzip-dev \
+    libpq-dev \
+    libssl-dev \
+    nodejs \
+    npm
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_pgsql zip
+
+# Install Composer globally
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /app
 
-# Copy Composer files
-COPY composer.json composer.lock ./
+# Copy Laravel files
+COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Copy package.json and install Node dependencies
-COPY package*.json ./
-RUN npm install
+# Install Node dependencies and build assets
+RUN npm install && npm run build
 
-# Copy application code
-COPY . .
-
-# Build Vite assets
-RUN npm run build
-
-# Expose port
+# Expose Laravel port
 EXPOSE 8000
 
-# Run the app
-CMD ["vendor/bin/heroku-php-apache2", "public/"]
+# Start Laravel using Artisan (or use a process manager like supervisord)
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
