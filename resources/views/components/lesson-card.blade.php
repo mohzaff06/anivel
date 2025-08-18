@@ -1,7 +1,7 @@
 <a href='/{{$lesson->category}}/{{$lesson->id}}{{$adminKey}}' class="group bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 hover:border-{{ $primaryColor ?? 'purple' }}-500/30 transition-all duration-300 hover:shadow-glow">
     <div class="aspect-video w-full overflow-hidden bg-slate-900">
         @if(isset($lesson->thumbnail))
-        <img src="{{ $lesson->thumbnail }}" alt="{{ $lesson->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        <img src="{{ asset('storage/' . $lesson->thumbnail) }}" alt="{{ $lesson->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
         @else
             <div class="relative w-full overflow-hidden rounded-xl bg-gradient-to-br from-purple-900/40 to-blue-900/40 border border-white/10">
                 <div class="aspect-[16/9] flex items-center justify-center">
