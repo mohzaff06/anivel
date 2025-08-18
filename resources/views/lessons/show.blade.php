@@ -68,7 +68,7 @@
 
     <!-- Lesson Content -->
     <div class="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden animate-fadeIn animation-delay-1000">
+        <div class="bg-gray-800 shadow-xl rounded-lg overflow-hidden animate-fadeIn animation-delay-1000">
             @if ($lesson->video)
             <div class="w-full aspect-video overflow-hidden">
                 @php
@@ -107,22 +107,22 @@
             </div>
             @endif
 
-            <div class="whitespace-pre-line p-6 md:p-8 prose prose-lg dark:prose-invert max-w-none">
+            <div class="whitespace-pre-line p-6 md:p-8 prose prose-invert max-w-none">
                 {!! Str::markdown($lesson->content) !!}
             </div>
 
             <!-- Content Info -->
-            <div class="border-t border-gray-200 dark:border-gray-700 p-6 md:p-8">
-                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Lesson Information</h2>
-                <div class="prose prose-lg dark:prose-invert max-w-none">
+            <div class="border-t border-gray-700 p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-white mb-6">Lesson Information</h2>
+                <div class="prose prose-invert max-w-none">
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Description</h3>
-                        <p class="text-gray-700 dark:text-gray-300">{{ $lesson->description }}</p>
+                        <h3 class="text-xl font-semibold text-white">Description</h3>
+                        <p class="text-gray-300">{{ $lesson->description }}</p>
                     </div>
                     @if(isset($lesson->category))
                     <div class="mb-6">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Category</h3>
-                        <p class="text-gray-700 dark:text-gray-300">{{ ucfirst($lesson->category) }}</p>
+                        <h3 class="text-xl font-semibold text-white">Category</h3>
+                        <p class="text-gray-300">{{ ucfirst($lesson->category) }}</p>
                     </div>
                     @endif
                 </div>

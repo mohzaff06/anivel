@@ -2,7 +2,7 @@
 
 A modern, interactive learning platform for animation and level design enthusiasts. Built with Laravel and featuring a stunning, responsive UI with Tailwind CSS.
 
-![Douchaym Platform](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)
+![Douhaym Platform](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)
 ![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
