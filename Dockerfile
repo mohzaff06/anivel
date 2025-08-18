@@ -38,3 +38,5 @@ EXPOSE 8000
 # Start Laravel using Artisan (or use a process manager like supervisord)
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 
+# Storage link
+RUN php artisan storage:link
